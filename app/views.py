@@ -1,4 +1,4 @@
-from app import app
+from app import app, db
 from flask import render_template, request, redirect, url_for
 import requests, json #python libraries
 from datetime import date 
