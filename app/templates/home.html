@@ -8,12 +8,12 @@
 <div class="jumbotron">
   <div class="container">
     <h1>Weather Forecast</h1>
-    <div id="forecast">
+    <div id="forecasts">
       {% for city, forecasts in data.items() %}
-          <p>{{ city }}</p>
+          <p id="city">{{ city }}</p>
 
           {% for forecast in forecasts %}
-            <p>{{ forecast }}</p>
+            <p id="forecast">{{ forecast }}</p>
           {% endfor %}
 
       {% endfor %}
@@ -24,6 +24,50 @@
 {% endblock %}
 
 {% block js %}
-<script src="{{ url_for('static', filename='js/app.min.js') }}" charset="utf-8"></script>
+<script>
+  //src="{{ url_for('static', filename='js/app.min.js') }}" charset="utf-8">
+  
+  /* To regularly check if forecasts are out of date */
+  // function getForecast(){
+  //   $.get('/api/forecast', function(data){
+  //   // jQuery.get('/api/forecast', function(data){
+  //       for (const[city,forecasts] of Object.entries(data)) {
+  //         document.getElementById("city").innerHTML =  city;
+
+  //         for (forecast in forecasts){
+  //           document.getElementById("forecast").innerHTML = forecast;
+  //         }
+  //       }
+  //     });
+  //   };
+
+  //   function updateAsNeeded(){
+  //     var sys_date = new Date();
+  //     var first_fore_date = {{ data['Kingston'][0][0]|tojson|safe }}; 
+  //     //console.log(fore_data['Kingston'][0][0])
+  //     if (sys_date = ( (new Date(first_fore_date)).getTime() ) +1){
+  //       getForecast();
+  //       //send emails
+  //     }
+  //   }
+
+  //   window.onload = function(e) {
+  //     setInterval(updateAsNeeded, 10000);
+
+  //     // const today = new Date()
+
+  //     // var tmrw = new Date()
+  //     // tmrw.setDate(today.getDate() + 1)
+  //     // tmrw.setHours(0,0,0,0) // midnight
+
+  //     // var timeDiff = today.getTime() - tmrw.getTime()
+  //     // console.log(today.getTime())
+  //     // console.log(tmrw.getTime())
+  //     // console.log(timeDiff)
+  //   }
+    
+
+
+</script> 
 {% endblock %}
 

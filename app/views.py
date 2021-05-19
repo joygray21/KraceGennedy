@@ -10,7 +10,7 @@ from datetime import date
 @app.route('/')
 def home():
     """Render website's home page."""
-    return render_template('home.html')
+    return render_template('home.html', data = get_forecast())
 
 @app.route('/api/forecast', methods=['GET'])
 def get_forecast():
@@ -26,7 +26,7 @@ def get_forecast():
         
         #convert the data to a python object (dict) with json.loads
         coord_content = json.loads(coord_req.content)
-
+        
         #get coordinates
         lon = coord_content['coord']['lon']
         lat = coord_content['coord']['lat']
@@ -51,6 +51,7 @@ def get_forecast():
             weekdayNum = fore_date.weekday() 
 
             impData = [ #data needed 
+                fore_date,
                 day, 
                 daysOfTheWeek[weekdayNum], #get weekday name
                 forecast['weather'][0]['description'], #weather description
@@ -62,8 +63,11 @@ def get_forecast():
             forecasts[city].append(impData) 
 
             
-    #display forecast information for the next five days
-    return render_template('home.html', data = forecasts) 
+    #X display forecast information for the next five days X
+    #return render_template('home.html', data = forecasts) 
+
+    #return forecast information for the next five days
+    return forecasts
 
 
 ### run statement
