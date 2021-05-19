@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, request, redirect, url_for
 import requests, json #python libraries
+from datetime import date 
 
 ###
 # Routes
@@ -13,6 +14,8 @@ def home():
 
 @app.route('/api/forecast', methods=['GET'])
 def get_forecast():
+    daysOfTheWeek = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+
     cities = ['Montego Bay', 'Kingston'] #for scalability, retrieve unique cities from db (next version)
     forecasts = {} #dictionary with each city and a list of its forecasts for the next 5 days
     
@@ -34,12 +37,32 @@ def get_forecast():
         #get temp values in Celsius - metric units
         fore_req = requests.get('http://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={exclude}&units={units}&appid={APIKey}'.format(lat=lat, lon=lon, exclude='current,minutely,hourly,alerts', units=app.config['UNITS'], APIKey=app.config['API_KEY']))
         
-        #convert the data to a python object and store it as the value for that city key
-        forecasts[city] = json.loads(fore_req.content) 
         
-    
-    #send daily forecast information for the next five days
-    return render_template('home.html', data = forecasts['Montego Bay']['daily'][1:6]) 
+        #convert the data to a python object getting only data for the next five days 
+        fore_results = json.loads(fore_req.content)['daily'][1:6]
+
+        #prepare storage for that city's forecasts 
+        forecasts[city] = []
+        
+        for forecast in fore_results: #for each day 
+            #convert timestamp
+            fore_date = date.fromtimestamp(forecast['dt'])
+            day = fore_date.day
+            weekdayNum = fore_date.weekday()
+
+            impData = [ #data needed 
+                day, 
+                daysOfTheWeek[weekdayNum],
+                forecast['weather'][0]['description'], #weather description
+                forecast['temp']['min'], #minimum temperature of the day
+                forecast['temp']['max'] 
+            ]
+
+            forecasts[city].append(impData)
+
+            
+    #display forecast information for the next five days
+    return render_template('home.html', data = forecasts) 
 
 
 ### run statement
