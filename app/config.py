@@ -4,6 +4,7 @@ class Config(object):
     """Base Config Object"""
     DEBUG = False
     API_KEY = os.environ.get("API_KEY")
+    UNITS = 'metric' #unit of measure that should be used for forecast values
     #SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'postgresql://yourusername:yourpassword@localhost/databasename'
     #SQLALCHEMY_TRACK_MODIFICATIONS = False # This is just here to suppress a warning from SQLAlchemy as it will soon be removed
 
