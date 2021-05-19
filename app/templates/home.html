@@ -9,7 +9,14 @@
   <div class="container">
     <h1>Weather Forecast</h1>
     <div id="forecast">
-        {{ data }}
+      {% for city, forecasts in data.items() %}
+          <p>{{ city }}</p>
+
+          {% for forecast in forecasts %}
+            <p>{{ forecast }}</p>
+          {% endfor %}
+
+      {% endfor %}
     </div>
 
   </div>
@@ -19,3 +26,4 @@
 {% block js %}
 <script src="{{ url_for('static', filename='js/app.min.js') }}" charset="utf-8"></script>
 {% endblock %}
+

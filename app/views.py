@@ -48,17 +48,18 @@ def get_forecast():
             #convert timestamp
             fore_date = date.fromtimestamp(forecast['dt'])
             day = fore_date.day
-            weekdayNum = fore_date.weekday()
+            weekdayNum = fore_date.weekday() 
 
             impData = [ #data needed 
                 day, 
-                daysOfTheWeek[weekdayNum],
+                daysOfTheWeek[weekdayNum], #get weekday name
                 forecast['weather'][0]['description'], #weather description
                 forecast['temp']['min'], #minimum temperature of the day
                 forecast['temp']['max'] 
             ]
 
-            forecasts[city].append(impData)
+            #add data to the forecasts dictionary
+            forecasts[city].append(impData) 
 
             
     #display forecast information for the next five days
