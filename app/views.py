@@ -15,9 +15,9 @@ def home():
 def get_forecast():
     cities = ['Montego Bay', 'Kingston'] #for scalability, retrieve unique cities from db
     forecasts = {} #dictionary with each city and a list of its forecasts for the next 5 days
-
+    
     for city in cities:
-        req = requests.get('http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={APIKey}'.format(city=city, APIKey='#')) 
+        req = requests.get('http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={APIKey}'.format(city=city, APIKey=app.config['API_KEY'])) 
         c = req.content
         #forecasts[city] = 
     
