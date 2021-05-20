@@ -19,4 +19,21 @@ class Worker(db.Model):
 
     
     def __repr__(self):
-        return '<User %r>' % (self.name)
+        return '<Worker %r>' % (self.name)
+
+
+# class EmailHistory(db.Model):
+#     day = db.Column(db.Integer, primary_key=True, autoincrement=False)
+#     rainyEmailsSent = db.Column(db.Boolean)
+#     sunnyEmailsSent = db.Column(db.Boolean)
+#     ITEmailsSent = db.Column(db.Boolean)
+### would need to adjust to consider cities
+
+#     def __init__(self, day, rainyEmailsSent, sunnyEmailsSent, ITEmailsSent):
+#         self.day = day
+#         self.rainyEmailsSent = rainyEmailsSent
+#         self.sunnyEmailsSent = sunnyEmailsSent
+#         self.ITEmailsSent = ITEmailsSent
+    
+#     def __repr__(self):
+#         return '<EmailHistory %r>' % (self.day)
