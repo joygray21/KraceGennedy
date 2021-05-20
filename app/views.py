@@ -1,4 +1,4 @@
-from app import app, db
+from app import app, db, mail
 from flask import render_template, request, redirect, url_for
 from flask_mail import Message
 import requests, json #python libraries
