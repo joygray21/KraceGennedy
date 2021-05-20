@@ -111,7 +111,7 @@ def get_forecast():
                 daysOfTheWeek[weekdayNum], #get weekday name
                 forecast['weather'][0]['description'], #weather description
                 forecast['pop'], #probability of rain
-                forecast['rain'],   #mm of rain
+                int(forecast['rain']),   #mm of rain
                 forecast['temp']['min'], #minimum temperature of the day
                 forecast['temp']['max'] 
             ]

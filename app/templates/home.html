@@ -12,12 +12,40 @@
       {% for city, forecasts in data.items() %}
           <p id="city">{{ city }}</p>
 
-          {% for forecast in forecasts %}
-            <p id="forecast">{{ forecast }}</p>
-          {% endfor %}
+          <div class="card-deck">
+            {% for forecast in forecasts %}
+              <div class="card">
+                <p>{{ forecast[1] }}, {{ forecast[0] }}</p>
+                                
+                {% if forecast[4] > 50 %}
+                  <p> Rainy Day </p>
+                  <br>
+                  <!-- <p><img src="{{ url_for('static', filename='rain.png') }}"/></p> -->
+                  <br>
+                {% else %}
+                  <p> Sunny Day </p>
+                  <br>
+                  <!-- <p><img src="{{ url_for('static', filename='sun.png') }}"/></p> -->
+                  <br>
+                {% endif %}
+                
+                
+
+                <p> {{ forecast[3] }} % chance of</p>
+                <p> {{ forecast[4] }} mm</p>
+                <p>{{ forecast[2] }}</p>
+                <br>
+
+                <p>Lowest: {{ forecast[5] }}°</p>
+                <p>Highest: {{ forecast[6] }}°</p>
+              </div>
+            {% endfor %}
+          </div>
 
       {% endfor %}
     </div>
+
+    <!-- Email History  -->
 
   </div>
 </div>
